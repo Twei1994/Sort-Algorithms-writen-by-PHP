@@ -1,4 +1,4 @@
-# Sort-Algorithms-writen-by-PHP
+# Sort-Algorithms-written-by-PHP
 
 用PHP实现的常用排序算法
 
