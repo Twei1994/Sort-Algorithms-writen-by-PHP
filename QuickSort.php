@@ -1,11 +1,12 @@
 <?php 
-
 $list = array(9, 1, 5, 8, 3, 7, 4, 6, 2);
-QuickSort($list);
-print_r($list);
+$res = QuickSort($list);
+print_r($res);
 
-function QuickSort(&$list) {
-	Qsort($list, 0, count($list)-1);
+function QuickSort($list) {
+	$len = count($list);
+	Qsort($list, 0, $len-1);
+	return $list;
 }
 
 function Qsort(&$list, $low, $high) {
@@ -17,20 +18,22 @@ function Qsort(&$list, $low, $high) {
 }
 
 function Partition(&$list, $low, $high) {
-	$length = count($list);
 	$pvalue = $list[$low];
-
 	while ($low < $high) {
 		while ($low < $high && $list[$high] > $pvalue) {
 			$high--;
 		}
-		$list[$low] = $list[$high];
+		swap($list, $low, $high);
 		while ($low < $high && $list[$low] < $pvalue) {
 			$low++;
 		}
-		$list[$high] = $list[$low];
+		swap($list, $low, $high);
 	}
-	$list[$low] = $pvalue;
 	return $low;
 }
-?>
+
+function swap(&$list, $i, $j) {
+	$temp = $list[$i];
+	$list[$i] = $list[$j];
+	$list[$j] = $temp;
+}

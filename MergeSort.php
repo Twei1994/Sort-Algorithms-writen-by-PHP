@@ -1,45 +1,45 @@
 <?php 
-
 $list = array(9, 1, 5, 8, 3, 7, 4, 6, 2);
-MergeSort($list);
-print_r($list);
+$res = MergeSort($list);
+print_r($res);
 
 function MergeSort(&$list) {
-	Msort($list, $list, 0, count($list)-1);
+	$len = count($list);
+	$res = array();
+	Msort($list, $res, 0, $len-1);
+	return $res;
 }
 
-function MSort(&$data, &$list, $s, $t) {
+function MSort(&$list, &$res, $s, $t) {
 	if ($s == $t) {
-		$list[$s] = $data[$s];
+		$res[$s] = $list[$s];
 	}else{
 		$m = floor(($s + $t)/2);
 		$temp = array();		//新建一个空数组
-		MSort($data, $temp, $s, $m);
-		MSort($data, $temp, $m+1, $t);
-		Merge($temp, $list, $s, $m, $t);
+		MSort($list, $temp, $s, $m);
+		MSort($list, $temp, $m+1, $t);
+		Merge($temp, $res, $s, $m, $t);
 	}
 }
 
-function Merge(&$temp, &$out, $s, $m, $t) {
+function Merge(&$temp, &$res, $s, $m, $t) {
 	for ($k = $s, $j = $m+1; $s <= $m && $j <= $t; $k++) { 
 		if ($temp[$s] < $temp[$j]) {
-			$out[$k] = $temp[$s];
+			$res[$k] = $temp[$s];
 			$s++;
 		}else{
-			$out[$k] = $temp[$j];
+			$res[$k] = $temp[$j];
 			$j++;
 		}
 	}
 	if ($s <= $m) {
 		for ($l = 0; $l <= $m-$s ; $l++) { 
-			$out[$k+$l] = $temp[$s+$l];
+			$res[$k+$l] = $temp[$s+$l];
 		}
 	}
 	if ($j <= $t) {
 		for ($l = 0; $l <= $t-$j ; $l++) { 
-			$out[$k+$l] = $temp[$j+$l];
+			$res[$k+$l] = $temp[$j+$l];
 		}
 	}
 }
-
-?>

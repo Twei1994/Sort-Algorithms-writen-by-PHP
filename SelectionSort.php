@@ -1,15 +1,13 @@
 <?php  
-
 $list = array(9, 1, 5, 8, 3, 7, 4, 6, 2);
-SelectionSort($list);
-print_r($list);
+$res = SelectionSort($list);
+print_r($res);
 
-function SelectionSort(&$list)
-{
-	$length = count($list);
-	for ($i = 0; $i < $length; $i++) {
+function SelectionSort($list) {
+	$len = count($list);
+	for ($i = 0; $i < $len; $i++) {
 		$min = $i; 
-		for ($j = $i; $j < $length; $j++) { 
+		for ($j = $i; $j < $len; $j++) { 
 			if ($list[$min] > $list[$j]) {
 				$min = $j;
 			}
@@ -18,12 +16,11 @@ function SelectionSort(&$list)
 			swap($list, $min, $i);
 		}
 	}
+	return $list;
 }
 
-function swap(&$list, $i, $j)
-{
+function swap(&$list, $i, $j) {
 	$temp = $list[$i];
 	$list[$i] = $list[$j];
 	$list[$j] = $temp;
 }
-?>
